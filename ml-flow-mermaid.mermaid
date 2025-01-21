@@ -1,21 +1,39 @@
-graph TD
-    A[Start] --> B[load_data]
-    B --> C[preprocess_data]
-    C --> D[print_shapes]
-    D --> E[evaluate_and_tune]
+flowchart TB
+    Start([Start]) --> LoadData[/"Load Data from CSV
+    load_data()"/]
     
-    subgraph evaluate_and_tune
-        E --> F[build_model]
-        F --> G[run_cross_validation_and_tuning]
-        
-        subgraph cv_and_tuning[Cross Validation and Tuning]
-            G --> H[cross_validate_model]
-            H --> I[tune_model]
-        end
-        
-        I --> J[train_model]
-        J --> K[evaluate_model]
+    subgraph Preprocessing["Preprocessing Section"]
+        LoadData --> Preprocess["Preprocess Data
+        preprocess_data()"]
+        Preprocess -->|"Returns"| DataSplit["X_train, X_test,
+        y_train, y_test, scaler"]
     end
     
-    K --> L[Output Results]
-    L --> M[End]
+    subgraph ModelBuilding["Model Building & Training"]
+        DataSplit --> PrintShapes["Print Dataset Shapes
+        print_shapes()"]
+        PrintShapes --> BuildModel["Build Random Forest
+        build_model()"]
+        BuildModel --> CrossVal["Cross Validation
+        cross_validate_model()"]
+        CrossVal --> TuneModel["Hyperparameter Tuning
+        tune_model()"]
+        TuneModel --> TrainModel["Train Model
+        train_model()"]
+    end
+    
+    subgraph Evaluation["Model Evaluation"]
+        TrainModel --> EvalModel["Evaluate Model
+        evaluate_model()"]
+        EvalModel --> Results["Output Results:
+        - Accuracy Score
+        - Classification Report"]
+    end
+    
+    Results --> End([End])
+    
+    classDef process fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef section fill:#fff3e0,stroke:#ff6f00,stroke-width:2px
+    
+    class LoadData,Preprocess,PrintShapes,BuildModel,CrossVal,TuneModel,TrainModel,EvalModel process
+    class Preprocessing,ModelBuilding,Evaluation section

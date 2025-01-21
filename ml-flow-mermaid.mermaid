@@ -1,0 +1,21 @@
+graph TD
+    A[Start] --> B[load_data]
+    B --> C[preprocess_data]
+    C --> D[print_shapes]
+    D --> E[evaluate_and_tune]
+    
+    subgraph evaluate_and_tune
+        E --> F[build_model]
+        F --> G[run_cross_validation_and_tuning]
+        
+        subgraph cv_and_tuning[Cross Validation and Tuning]
+            G --> H[cross_validate_model]
+            H --> I[tune_model]
+        end
+        
+        I --> J[train_model]
+        J --> K[evaluate_model]
+    end
+    
+    K --> L[Output Results]
+    L --> M[End]

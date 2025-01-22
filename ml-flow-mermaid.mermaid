@@ -2,8 +2,48 @@ graph TD
     A[Data Preparation] --> B[Feature Engineering]
     B --> C[Demand Statistics Calculation]
     C --> D[Safety Stock Optimization]
+    
+    A --> A1[Load Raw Data]
+    A --> A2[Data Cleaning]
+    A --> A3[Date Range Selection]
+    
+    B --> B1[Calculate Average Inventory]
+    B --> B2[Add Cost and Price Data]
+    B --> B3[Add Current Details]
+    B --> B4[Calculate Demand Probability]
+    
+    C --> C1[Calculate Mean Demand]
+    C --> C2[Calculate Standard Deviation of Demand]
+    C --> C3[Calculate Lead Time]
+    C --> C4[Calculate Cycle Stock]
+    
     D --> E[Monte Carlo Simulation]
     E --> F[Bayesian Optimization]
+    
+    E --> E1[Generate Demand Scenarios]
+    E --> E2[Simulate Inventory Levels]
+    E --> E3[Calculate Stockouts]
+    
+    F --> F1[Define Objective Function]
+    F2[Set Search Space] --> F
+    F3[Initialize Optimizer] --> F
+    F --> F4[Iterate Optimization]
+    F4 --> F5[Update Best Solution]
+    
     F --> G[Results Generation]
     G --> H[Explanation Generation]
+    
+    G --> G1[Calculate Optimal Safety Stock]
+    G --> G2[Compare with Current Safety Stock]
+    G --> G3[Calculate Savings]
+    
+    H --> H1[Analyze Demand Fluctuations]
+    H --> H2[Evaluate Inventory Levels]
+    H --> H3[Generate Reason Codes]
+    H --> H4[Create Detailed Explanations]
+    
     H --> I[Output Safety Stock Recommendations]
+    
+    I --> I1[Generate Final Report]
+    I --> I2[Save Results to File]
+This expanded mermaid diagram provi
